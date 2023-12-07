@@ -28,12 +28,12 @@ class Transformation:
         return any(z_scores > z_threshold)
 
     def drop_features(self, to_drop: list) -> pd.DataFrame:
-        return self.df.drop(columns=to_drop, inplace=False)
+        return self.df.drop(columns=to_drop, axis = 1)
 
     def drop_features_with_threshold(self, threshold: float) -> pd.DataFrame:
         missing_percentage = (self.df.isnull().sum() / len(self.df)) * 100
         columns_to_drop = missing_percentage[missing_percentage > threshold].index.tolist()
-        return self.df.drop(columns=columns_to_drop, inplace=False)
+        return self.df.drop(columns=columns_to_drop, axis = 1)
     
     def encode_features(self, unique_values_threshold: int = 15) -> pd.DataFrame:
         encoded_df = pd.DataFrame()
