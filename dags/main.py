@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 
-from IngestionLayer.ingest import 
+from IngestionLayer.ingest import *
 
 default_args = {
     'owner': 'anmol',
@@ -12,6 +12,7 @@ default_args = {
 }
 
 
+if __name__ == "__main__":
+    all_sensors = os.listdir('datasets/Sensors-predictive-maintenance/')
+    print(all_sensors)
 
-# if __name__ == "__main__":
-#     dag.cli()
