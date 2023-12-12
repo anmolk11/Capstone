@@ -49,8 +49,8 @@ def getDataFromPostgreSQL(table_name : str) -> pd.DataFrame:
     return df
 
 def getSystemLog(system_name : str) -> pd.DataFrame:
-    path = f'../datasets/System Log/{system_name}/{system_name}.log'
-
+    path = f'dags/datasets/System Log/{system_name}/{system_name}.log'
+    path = os.path.join(os.getcwd(), path)
     cols_hdfs = ['Date','Time','Pid','Level','Component','Content']
     cols_apace = ['Day','Date','Time','Level','Content']
 
@@ -72,7 +72,7 @@ def getSystemLog(system_name : str) -> pd.DataFrame:
 
 
 def getSensorsData(sensorname : str) -> list:
-    path = f'../datasets/Sensors-predictive-maintenance/{sensorname}/'
+    path = os.path.join(os.getcwd(), f'dags/datasets/Sensors-predictive-maintenance/{sensorname}/')
     if not os.path.exists(path):
         raise FileNotFoundError(f"The folder '{path}' does not exist.")
 
@@ -83,13 +83,16 @@ def getSensorsData(sensorname : str) -> list:
     for csv_file in csv_files:
         file_path = os.path.join(path, csv_file)
         df = pd.read_csv(file_path)
-        dataframes.append(df)
+        dataframes.append({
+            'file_name' : csv_file,
+            'data' : df
+        })
 
     return dataframes
 
 
 if __name__ == '__main__':
-    all_sensors = os.listdir('../datasets/Sensors-predictive-maintenance/')
+    all_sensors = os.listdir('datasets/Sensors-predictive-maintenance/')
     for sensor in all_sensors:
         print(f'\n{sensor}')
         print('--------------------------')
