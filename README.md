@@ -1,3 +1,3 @@
 # Capstone
 
-anything
+![alt text](architecture.png)
