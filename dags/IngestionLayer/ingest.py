@@ -92,10 +92,5 @@ def getSensorsData(sensorname : str) -> list:
 
 
 if __name__ == '__main__':
-    all_sensors = os.listdir('datasets/Sensors-predictive-maintenance/')
-    for sensor in all_sensors:
-        print(f'\n{sensor}')
-        print('--------------------------')
-        all_data = getSensorsData(sensor)
-        for data in all_data:
-            print(data.shape)
+    df = getDataFromPostgreSQL('hr_core')
+    print(df.info())

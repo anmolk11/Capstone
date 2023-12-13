@@ -14,9 +14,10 @@ class ConsistencyChecker:
     def check_missing_values(self) -> bool:
         return self.df.isnull().any().any()
     
-    def drop_duplicates(self):
+    def drop_duplicates(self) ->pd.DataFrame:
         if self.check_duplicate_rows():
             self.df = self.df.drop_duplicates()
+        return self.df
 
     def check_column_values(self, column_name: str, allowed_values: list) -> bool:
         return all(value in allowed_values for value in self.df[column_name])
