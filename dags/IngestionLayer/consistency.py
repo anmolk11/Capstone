@@ -13,6 +13,10 @@ class ConsistencyChecker:
 
     def check_missing_values(self) -> bool:
         return self.df.isnull().any().any()
+    
+    def drop_duplicates(self):
+        if self.check_duplicate_rows():
+            self.df = self.df.drop_duplicates()
 
     def check_column_values(self, column_name: str, allowed_values: list) -> bool:
         return all(value in allowed_values for value in self.df[column_name])

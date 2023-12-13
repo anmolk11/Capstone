@@ -36,6 +36,12 @@ def transformSensorData(ti):
         transformer.encode_features()
         transformer.scale_features()
 
+def storeMetaData(ti):
+    pass
+
+def consistencyCheck(ti):
+    pass
+
 
 with DAG(
     dag_id = 'Capstone',
