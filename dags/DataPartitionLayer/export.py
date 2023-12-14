@@ -19,12 +19,15 @@ def exportCSV(df: pd.DataFrame, folder_name: str, file_name: str) -> None:
     df.to_csv(path)
 
 def exportMetaData(data, folder_name: str, file_name: str) -> None:
+    if data == None:
+        return
+    
     warehouse_path = 'Warehouse/MetaData'
     folder_path = f'{warehouse_path}/{folder_name}'
 
     create_folder_if_not_exists(folder_path)
-
-    path = f'{folder_path}/{file_name}.txt'
+    base_name = os.path.splitext(file_name)[0]   
+    path = f'{folder_path}/{base_name}.txt'
     path = os.path.join(os.getcwd(), path)
 
     with open(path, 'w') as F:
